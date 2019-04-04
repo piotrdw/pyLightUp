@@ -166,7 +166,6 @@ class GameMap(object):
             print("cannot place lamps in lit spaces...")
             return
 
-        print("Placing lamp at " + str(PosRow) + "," + str(PosCollumn) + " ...")
         self.Map[PosRow][PosCollumn] = Tile.EmptyLamp
         # update lighting
 
@@ -399,8 +398,6 @@ def depthfirstsearch(node):
     root.UpdateNodesToVisit()
     visited = []
     a = root.nodesToVisit
-    le = len(a)
-    print(le)
 
     while a:
         x = a.pop()
@@ -409,12 +406,8 @@ def depthfirstsearch(node):
         if x not in visited:
             visited.append(x)
             x.UpdateNodesToVisit()
-            le = len(x.nodesToVisit)
-            print(le)
-            #for n in x.nodesToVisit:
-            #   a.append(n)
-                # print("a")
-
+            for n in x.nodesToVisit:
+                a.append(n)
 
 
 
