@@ -393,19 +393,27 @@ class Node():
 
 
 def depthfirstsearch(node):
-
+    # initial
     root = Node(node.state, node.parent, node.steps)
     root.UpdateNodesToVisit()
     visited = []
     a = root.nodesToVisit
-
+    # main loop
     while a:
         x = a.pop()
+        x.UpdateNodesToVisit()
         if x.state.CheckMap():
             return x
-        if x not in visited:
+        # check for visited states
+        flag = 0
+        for r in visited:
+            for p in x.nodesToVisit:
+                if p.state == r.state:
+                    flag = 1
+                    print("flag")
+        # if states were not visited append to stack
+        if flag == 0:
             visited.append(x)
-            x.UpdateNodesToVisit()
             for n in x.nodesToVisit:
                 a.append(n)
 
@@ -424,6 +432,7 @@ def test():
     map = GameMap(7)
     # Map.PrintMap()
     root = Node(map,map,map)
-    depthfirstsearch(root)
+    d = depthfirstsearch(root)
+    d.state.PrintMapConsole()
 
 test()
